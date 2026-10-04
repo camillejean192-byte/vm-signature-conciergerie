@@ -36,3 +36,9 @@ document.querySelectorAll('details').forEach((detail) => detail.addEventListener
   if (!detail.open) return;
   document.querySelectorAll('details').forEach((other) => { if (other !== detail) other.open = false; });
 }));
+
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach((item) => revealObserver.observe(item));
